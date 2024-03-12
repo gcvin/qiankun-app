@@ -8,6 +8,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { loadMicroApp } from 'qiankun'
 import { onMounted } from 'vue';
 import config from '@/config'
+import * as stores from '@/stores/counter'
 
 const { subApps, mounted } = config
 const route = useRoute()
@@ -19,7 +20,7 @@ onMounted(() => {
   }
   const app = subApps.find(app => route.path.startsWith(app.activeRule))
   if (app && !app.microApp) {
-    app.microApp = loadMicroApp(app)
+    app.microApp = loadMicroApp({...app, props: {stores}})
     mounted[app.name] = true
   }
 })
@@ -27,7 +28,7 @@ router.afterEach((to) => {
   subApps.forEach(app => {
     if(to.path.startsWith(app.activeRule)) {
       if (!app.microApp) {
-        app.microApp = loadMicroApp(app)
+        app.microApp = loadMicroApp({...app, props: {stores}})
         mounted[app.name] = true
       } else if (app.microApp.getStatus() === 'NOT_MOUNTED' && !mounted[app.name]) {
         app.microApp.mount()

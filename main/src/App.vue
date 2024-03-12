@@ -1,7 +1,9 @@
 <script setup>
 import { RouterView, useRoute } from 'vue-router'
 import { Menu, HomeFilled } from '@element-plus/icons-vue'
+import { useCounterStore } from '@/stores/counter'
 
+const store = useCounterStore()
 const route = useRoute()
 </script>
 
@@ -31,6 +33,8 @@ const route = useRoute()
         <el-menu-item index="/app-2/about">About</el-menu-item>
       </el-sub-menu>
     </el-menu>
+    {{ store.count }}
+    <el-button @click="store.increment">click</el-button>
     <RouterView v-slot="{ Component }">
       <KeepAlive>
         <component :is="Component" />

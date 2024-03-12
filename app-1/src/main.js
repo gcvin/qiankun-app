@@ -11,8 +11,9 @@ import router from './router'
 
 let app
 
-const render = (container) => {
+const render = (container, stores) => {
   app = createApp(App)
+  app.config.globalProperties.stores = stores
   app
     .use(router)
     .use(createPinia())
@@ -23,8 +24,8 @@ const render = (container) => {
 const initQianKun = () => {
   renderWithQiankun({
     mount(props) {
-      const { container } = props
-      render(container)
+      const { container, stores } = props
+      render(container, stores)
       console.log(props.name, 'mount')
     },
     bootstrap() {},
