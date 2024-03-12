@@ -25,10 +25,12 @@ const initQianKun = () => {
     mount(props) {
       const { container } = props
       render(container)
+      console.log(props.name, 'mount')
     },
     bootstrap() {},
-    unmount() {
+    unmount(props) {
       app.unmount()
+      console.log(props.name, 'unmount')
     }
   })
 }

@@ -20,4 +20,12 @@ const router = createRouter({
   ]
 })
 
+if (qiankunWindow.__POWERED_BY_QIANKUN__) {
+  router.afterEach(() => {
+    if(location.pathname.startsWith('/app-2') && !history.state.current.startsWith('/app-2')) {
+      history.state.current = '/app-2' + history.state.current
+    }
+  })
+}
+
 export default router

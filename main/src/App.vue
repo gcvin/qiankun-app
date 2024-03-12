@@ -31,7 +31,11 @@ const route = useRoute()
         <el-menu-item index="/app-2/about">About</el-menu-item>
       </el-sub-menu>
     </el-menu>
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <KeepAlive>
+        <component :is="Component" />
+      </KeepAlive>
+    </RouterView>
   </div>
 </template>
 
