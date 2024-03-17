@@ -14,6 +14,6 @@ store.$subscribe((_, state) => {
   <el-config-provider namespace="app-1-el">
     <RouterView />
     {{ count }}
-    <el-button @click="store.increment">click</el-button>
+    <el-button @click="store.count++">click</el-button>
   </el-config-provider>
 </template>
